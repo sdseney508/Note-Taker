@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //handle JSON and urlencoded form data
-app.use(express.JSON());
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/api', api);
 
