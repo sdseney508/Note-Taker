@@ -1,4 +1,5 @@
 # Note-Taker
+![image](https://user-images.githubusercontent.com/62141103/158160517-257294e8-982b-4389-a86e-38ac9cace0c9.png)
 
 ## Description
  This application allows a user to store and manage simple notes online.  It is fully deployed utilizing Heroku.
