@@ -52,7 +52,7 @@ https://gentle-lake-67791.herokuapp.com/
  ## License
 
  ![badge](https://img.shields.io/badge/license-MIT-blue)
- License file can be found at: https://github.com/sdseney508/Team-Profile-Generator/blob/main/LICENSE.txt
+ License file can be found at: https://github.com/sdseney508/Note-TAker/blob/main/LICENSE.txt
  ## Badges
 
  ## Features
