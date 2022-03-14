@@ -51,7 +51,6 @@ const deleteNote = async (id) =>
   });
 
 const renderActiveNote = () => {
-  debugger;
   hide(saveNoteBtn);
 
   if (activeNote.id) {

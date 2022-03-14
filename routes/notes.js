@@ -87,42 +87,4 @@ notes.post('/', (req, res) => {
     }
 });
 
-
-notes.put('/api/notes', (req, res) => {
-    //log it so i can check that everything worked
-    console.log(req.body);
-    let parsed_data = [];
-    const { title, text } = req.body;
-
-    if (req.body) {
-        const new_note = {
-            title,
-            text,
-            note_id: uuidv4()
-        };
-
-        //now add the new note to the file.  first we read the file; then we
-        //parse it, append it using .push(data) method, then write to file.
-        fs.readFile(file_path, 'utf-8', (err, data) => {
-            if (err) {
-                console.err(err);
-                res.status(500).send("Server Error");
-            }
-            else {
-                parsed_data = JSON.parse(data);
-                parsed_data.push(new_note);
-                fs.writeFile(file_path, JSON.stringify(parsed_data, null, 4), (err) => {
-                    err ? console.error(err) : console.info(`\nNew Note written to ${file_path}`)
-                    res.status(200).send("Yeah");
-                });
-
-            }
-        });
-        //now we write to file
-    }
-    else {
-        //log an error for later
-        res.error('Something went wrong');
-    }
-});
 module.exports = notes;
