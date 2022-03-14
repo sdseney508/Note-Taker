@@ -5,8 +5,8 @@ body {
   padding: 0;
 }
 
-.delete-note {
-  color: red;
+.save-note {
+  display: none;
 }
 
 .icons i {
@@ -42,15 +42,14 @@ body {
 }
 
 .list-container .card {
-  min-height: 3rem;
-  border-bottom: 1px solid grey;
+  height: calc(100vh - 70px);
+  border-bottom: none;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .list-container {
   padding-left: 0;
-  /* border-bottom: 1px solid grey; */
 }
 
 .list-container .list-group,

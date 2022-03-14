@@ -5,7 +5,7 @@ const { title } = require('process');
 const file_path = './db/db.json';
 
 //get router for notes in the db.json database
-notes.get('api/notes', (req, res) => {
+notes.get('/', (req, res) => {
     fs.readFile(file_path, 'utf8', (err,data) => {
         if (err) {
             console.error(err);
@@ -21,26 +21,35 @@ notes.get('api/notes', (req, res) => {
  
 });
 
-
 //DELETE route for the bonus
-notes.delete('/:note_id', (req, res) => {
-    const noteID = req.params.note_id;
-    fs.readFileSync(file_path);
-    const json = JSON.parse(data);
-    //use the object filter method to remove the one we want deleted. 
-    const newobj = json.filter((note) => note.note_id !== noteID);
+notes.delete('/:id', (req, res) => {
+    const noteID = req.params.id;
+    console.log(noteID);
+    fs.readFile(file_path, 'utf8',(err,data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Server Error");
+        }
+        else {
+            const json = JSON.parse(data);
+            console.log(json);
+            //use the object filter method to remove the one we want deleted. 
+            const newobj = json.filter((note) => note.id !== noteID);
+        
+            //save the new object back to storage
+            fs.writeFile(file_path, JSON.stringify(newobj, null, 4), (err) =>
+                err ? console.error(err) : console.info(`\nNote ${noteID} was deleted`)
+            );
+        
+            //give user a response if succesful
+            res.json(`Note ${noteID} was deleted`);
 
-    //save the new object back to storage
-    fs.writeFile(file_path, JSON.stringify(newobj, null, 4), (err) =>
-        err ? console.error(err) : console.info(`\nNote ${noteID} was deleted`)
-    );
-
-    //give user a response if succesful
-    res.json(`Note ${noteID} was deleted`);
+        }
+    });
 });
 
 //post route for a new note
-notes.post('/api/notes', (req, res) => {
+notes.post('/', (req, res) => {
     //log it so i can check that everything worked
     console.log(req.body);
     let parsed_data = [];
@@ -50,7 +59,7 @@ notes.post('/api/notes', (req, res) => {
         const new_note = {
             title,
             text,
-            note_id: uuidv4()
+            id: uuidv4()
         };
 
         //now add the new note to the file.  first we read the file; then we
@@ -77,6 +86,7 @@ notes.post('/api/notes', (req, res) => {
         res.error('Something went wrong');
     }
 });
+
 
 notes.put('/api/notes', (req, res) => {
     //log it so i can check that everything worked

@@ -1,15 +1,16 @@
 const path = require('path');
 const express = require('express');
-const api = require('./routes/index.js')
-
-const PORT = process.env.PORT || 3001;
+const api = require('./routes/index');
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+
 
 //handle JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/api', api);
+app.use(express.static('public'));
 
 //routes needed:  
 //html:  GET /notes -> returns the notes.html file
